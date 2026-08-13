@@ -1,0 +1,87 @@
+export type BetaItem = {
+  id: number;
+  title: string;
+  desc: string;
+  date_added: string;
+  author: string;
+  status: boolean | string;
+};
+
+export const BETAITEMS: BetaItem[] = [
+  {
+    id: 1,
+    title: "เรียนนวิชาเว็บ",
+    desc: "recat (next.js),node.jsเเละtailwindcss",
+    date_added: "23/07/2569",
+    author: "ประวิทย์",
+    status: "true",
+  },
+  {
+    id: 2,
+    title: "สเปนได้บอลโลก",
+    desc: "ดูบอลโลก2026",
+    date_added: "23/07/2569",
+    author: "ประวิทย์",
+    status: "false",
+  },
+  {
+    id: 3,
+    title: "นอน",
+    desc: "นอน",
+    date_added: "23/07/2569",
+    author: "ประวิทย์",
+    status: "true",
+  },
+];
+
+export const appendBetaItem: BetaItem[] = [
+  {
+    id: 4,
+    title: "บ้าroblox1",
+    desc: "บ้าroblox",
+    date_added: "23/07/2569",
+    author: "ประวิทย์",
+    status: "true",
+  },
+  {
+    id: 5,
+    title: "grow a garden",
+    desc: "grow a garden",
+    date_added: "23/07/2569",
+    author: "ประวิทย์",
+    status: "true",
+  },
+];
+
+export function BetaItemCard({ item }: { item: BetaItem }) {
+  const isActive = item.status === true || item.status === "true";
+  const {id,title,desc,author,date_added,status}=item;
+  return (
+    <div>
+      <div className="text-sm text-slate-500">หัวข้อ</div>
+      <div className="font-semibold text-slate-900">{title}</div>
+      <div className="mt-2 text-sm text-slate-600">{desc}</div>
+      <div className="mt-3 text-xs text-slate-500">วันที่เพิ่ม: {date_added}</div>
+      <div className="mt-1 text-xs text-slate-500">ผู้เขียน: {author}</div>
+      <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+        <span
+          className={isActive ? "text-green-700" : "text-red-700"}
+          aria-label={isActive ? "กำลังศึกษา" : "ไม่ได้ศึกษา"}
+        >
+          {isActive ? "กำลังศึกษา" : "ไม่ได้ศึกษา"}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+export default function BetaItemList({ items = BETAITEMS }: { items?: BetaItem[] }) {
+  return (
+    <>
+      {items.map((item) => (
+        <BetaItemCard key={item.id} item={item} />
+      ))}
+    </>
+  );
+}
+
