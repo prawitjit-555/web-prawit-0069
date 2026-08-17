@@ -3,6 +3,8 @@ import { useState } from "react";
 import BetaItemList, { BETAITEMS, appendBetaItem, type BetaItem } from "../beta/betaitem";
 import Header from "../compounents/headers";
 import Footer from "../compounents/footer";
+import Todofrom from "./compuonent/todofrom";
+import Modal from "./compuonent/modal";
 
 export default function TodoList() {
   const name = "ประวิทย์";
@@ -17,6 +19,7 @@ export default function TodoList() {
   const [status,setstatus]=useState(null);
   const filtertask=status==null ? task :
     task.filter((item)=>item.status == status);
+  
   const renderStatusBadge = (isActive: boolean) => {
     return isActive ? (
       <span className="inline-flex rounded-full bg-green-500 px-3 py-1 text-sm font-semibold text-white">
@@ -28,23 +31,22 @@ export default function TodoList() {
       </span>
     );
   };
-  const addtask = () => {
+  const addtask = (title,status) => {
     const newTask: BetaItem = {
       id: task.length+1,
-      title: "ทดสอบ",
+      title: title,
       desc: "รายละเอียดงาน",
-      date_added: "13/08/2569",
+      date_added: "17/08/2569",
       author: "ประวิทย์",
-      status: "true",
+      status: status,
     };
     settask([...task, newTask]);
     setnoft(task.length+1);
   };
-  
   return (
     <>
     <Header />
-    <main className=" bg-[#00ffff] flex items-center justify-center px-4 py-10">
+    <main className=" bg-[black]] flex items-center justify-center px-4 py-10">
       <div className="max-w-3xl w-full rounded-[28px] overflow-hidden shadow-[0_35px_60px_-15px_rgba(15,23,42,0.35)] bg-white transition-shadow duration-300 hover:shadow-[0_40px_80px_-20px_rgba(15,23,42,0.4)]">
         </div>
         <div className="grid grid-cols-1 gap-6">
@@ -61,17 +63,18 @@ export default function TodoList() {
                 </svg>
                 TO DO LIST
               </p>
-
+             
               <div className="space-y-3 flex justify-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">จำนวนงาน x รายการ</div>
                  <div>
+                  <Todofrom addtask={addtask} />
                       <button onClick={addtask}>เพิ่มงาน</button>
                  </div>
                  <div>
-                      <button type="button" className="text-black bg-#00FFFF box-border border border-transparent hover:bg-success-strong focus:ring-4 focus:ring-success-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none  style="onClick={()=> setstatus(null)}>Success</button>
+                      <button type="button" className="text-black bg-gradient-to-br from-red-600 to-pink-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5"onClick={()=> setstatus(null)}>Success</button>
                       <button type="button" className="text-heading bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5"onClick={()=> setstatus(null)}>fail</button>
                       <button type="button" className="text-black bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5"onClick={()=> setstatus(null)}>not</button>
                  <div></div>
-
+                        
               <div className="mt-4 space-y-2 text-slate-900 font-semibold text-lg">
                 <div>ชื่อ: {name}</div>
                 <div>สาขา: {major}</div>

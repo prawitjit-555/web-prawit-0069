@@ -1,3 +1,6 @@
+" use Client " ;
+import { useState } from "react";
+import Modal from "../week4/compuonent/modal";
 export type BetaItem = {
   id: number;
   title: string;
@@ -54,10 +57,20 @@ export const appendBetaItem: BetaItem[] = [
 ];
 
 export function BetaItemCard({ item }: { item: BetaItem }) {
+  const [open,setopen]= useState(false);
+  const onedit= (t)=>{
+    alert(t);
+  }
+  const ondeleted =(id)=>{
+     alert("'งานที่ต้องการเเก้ไข$(t)` ");
+  }
   const isActive = item.status === true || item.status === "true";
   const {id,title,desc,author,date_added,status}=item;
   return (
     <div>
+       <Modal open={open} onClose={() => setopen(false)}>
+          <div className="text-white">{title}</div>
+       </Modal>
       <div className="text-sm text-slate-500">หัวข้อ</div>
       <div className="font-semibold text-slate-900">{title}</div>
       <div className="mt-2 text-sm text-slate-600">{desc}</div>
@@ -70,6 +83,16 @@ export function BetaItemCard({ item }: { item: BetaItem }) {
         >
           {isActive ? "กำลังศึกษา" : "ไม่ได้ศึกษา"}
         </span>
+      </div>
+      <div className="flex gap-2 mt-2">
+              {/* View */}
+       <button onClick={(e)=>setopen(true)} className="bg-green-500 text-white px-3 py-1 rounded">View</button>
+
+           {/* Edit */}
+          <button onClick={(e)=>onedit(item)} className="bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
+
+            {/* Delete */}
+       <button onClick={(e)=>ondeleted(id)} className="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
       </div>
     </div>
   );
@@ -84,4 +107,3 @@ export default function BetaItemList({ items = BETAITEMS }: { items?: BetaItem[]
     </>
   );
 }
-
