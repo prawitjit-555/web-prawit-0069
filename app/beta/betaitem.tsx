@@ -70,6 +70,10 @@ export function BetaItemCard({ item }: { item: BetaItem }) {
     <div>
        <Modal open={open} onClose={() => setopen(false)}>
           <div className="text-white">{title}</div>
+          <div className="text-white">{id}</div>
+          <div className="text-white">{desc}</div>
+          <div className="text-white">{date_added}</div>
+          <div className="text-white">{author}</div>
        </Modal>
       <div className="text-sm text-slate-500">หัวข้อ</div>
       <div className="font-semibold text-slate-900">{title}</div>
