@@ -1,80 +1,84 @@
-"use client";
+"Use client";
 
-import { useState } from "react";
 
-export default function TodoForm({ addtask }) {
-  const [title, setTitles] = useState("");
-  const [taskStatus, setTaskStatus] = useState(false);
+import { useState, useEffect } from "react";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!title.trim()) return;
-    addtask(title, taskStatus);
-    handleCancel();
-  };
+export default function ToDoFrom({ addTask, editingTask, updateTask, resetEditingTask }){
 
-  const handleCancel = () => {
-    setTitles("");
-    setTaskStatus(false);
-  };
+    const [title, setTitle] = useState('');
+    const [taskStatus, setTaskstatus] = useState(false);
 
-  return (
-    <form onSubmit={handleSubmit}>
+  useEffect(() => {
+    
+    if(editingTask) 
+    {
+      const { title, status } = editingTask;
+      setTitle(title);
+      setTaskstatus(status);
+    
+    }else{
+      
+      setTitle('');
+      setTaskstatus(false);
+      
+    }
+    }, [editingTask]);
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if(!title.trim()) return;
+
+        if(editingTask)
+          updateTask(editingTask.id, title, taskStatus);
+        else
+          addTask(title, taskStatus);
+        handleCancel;
+
+    }
+
+    const handleCancel = (e) => {
+        setTitle('');
+        setTaskstatus(false);
+        resetEditingTask()
+    }
+
+    return  (
+        <form onSubmit={handleSubmit}>
       <div className="m-3 p-6 bg-white rounded-xl shadow-md">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">เพิ่มข้อมูล</h3>
-        
         <div className="flex">
           <label className="mb-2 text-sm font-medium text-slate-700">รายการที่ต้องทำ:</label>
           <input
             type="text"
             placeholder="Enter task..."
-            className="w-11/12 ms-4 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm"
+            className="w-11/12 ms-4 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease-content focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
             value={title}
-            onChange={(e) => setTitles(e.target.value)}
+            onChange={(e) =>setTitle(e.target.value)}
+            
           />
         </div>
-
         <div className="flex gap-3">
           <label className="mt-4 py-4 text-sm font-medium text-slate-700">การดำเนินการ:</label>
           <label className="mt-4 px-4 py-4 flex items-center gap-3 cursor-pointer hover:bg-gray-50 rounded-lg">
-            <input
-              type="radio"
-              name="taskStatus"
-              checked={taskStatus === true}
-              onChange={() => setTaskStatus(true)}
-              className="h-4 w-4 accent-blue-600 cursor-pointer"
-            />
+            <input type="radio" name="taskStatus" value='true' checked={taskStatus === true} onChange={(e) => setTaskstatus(e.target.value === 'true')} className="h-4 w-4 accent-blue-600 cursor-pointer" />
             <span className="text-sm font-medium text-gray-700">Completed</span>
           </label>
-
           <label className="ms-2 mt-4 px-4 flex items-center gap-3 cursor-pointer hover:bg-gray-50 rounded-lg">
-            <input
-              type="radio"
-              name="taskStatus"
-              checked={taskStatus === false}
-              onChange={() => setTaskStatus(false)}
-              className="h-4 w-4 accent-blue-600 cursor-pointer"
-            />
+            <input type="radio" name="taskStatus" value='false' checked={taskStatus === false} onChange={(e) => setTaskstatus(e.target.value === 'true')} className="h-4 w-4 accent-blue-600 cursor-pointer" />
             <span className="text-sm font-medium text-gray-700">Pending</span>
           </label>
         </div>
-
         <div className="flex mt-4 gap-2 justify-center">
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-1 rounded"
-          >
-            add new task
+          <button className="bg-blue-600 text-white px-4 py-1 rounded">
+            {editingTask ? 'updateTask' : 'Add new task'}
+    
           </button>
-          <button
-            type="button"
-            className="bg-gray-600 text-white px-4 py-1 rounded"
-            onClick={handleCancel}
-          >
+          <button className="bg-gray-600 text-white px-4 rounded" onClick={handleCancel}>
             Cancel
           </button>
         </div>
       </div>
     </form>
-  );
+    );
 }
