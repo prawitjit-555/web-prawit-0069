@@ -2,14 +2,14 @@
 import { useState } from "react";
 import Header from "../compounents/headers"; // หรือใช้ "@/app/compounents/headers"
 import Footer from "../compounents/footer";  // หรือใช้ "@/app/compounents/footer"
-import { BetaItem, BETAITEMS } from "../beta/betaitem"; // เช็กชื่อไฟล์และ path ให้ตรง
-import ToDoFrom from "./compuonent/todofrom";
+import {HERBITEM} from "../beta/betaitem"; // เช็กชื่อไฟล์และ path ให้ตรงs
+import Herbhome from "./compuonent/herbhome";
 import Modal from "./compuonent/modal";
 
 
 export default function toDoList(){
      
-    const toDoList = [...BETAITEMS, ...BETAITEMS]
+    const toDoList = [...HERBITEM, ...HERBITEM]
     const [Tasks, setTasks] = useState(toDoList);
     const [numOfTask, setNoft] = useState(Tasks.length);
     const [status, setStatus] = useState(null);
@@ -26,26 +26,21 @@ export default function toDoList(){
         (item) => item.status == status
      );
 
-    let name = "prawit jitsuwan";
-    const major = "เทคโนโลยีสารสนเทศ (Information Techonology)";
-    let classYear = 2;
-    let classSec = "ทส.ท.";
-    let active = true;
-
+   
 
     const isActive = (act: boolean) => {
     if (act)
-    return <span style={{ color: "green"}}>กำลังศึกษาอยู่</span>;
-    return <span style={{ color: "rad"}}>ไม่ได้เป็นนักศึกษาแล้วนะ</span>;
+    return <span style={{ color: "green"}}></span>;
+    return <span style={{ color: "rad"}}></span>;
   }
  const addTask = (title, status) => {
    console.log(  Tasks.length+1,);
     const newTask ={
         id: Tasks.length+1,
         title: title,
-        desc: "รายละเอียดของงานที่เพิ่ม",
-        date_added: "13/08/2569",
-        author: "Thanakron",
+        desc: "",
+        date_added: "",
+        author: "",
         status: status
 
     };
@@ -54,8 +49,7 @@ export default function toDoList(){
     setNoft (Tasks.length+1);
  }
   
-    console.log(`Name: ${name} `);
-    console.log(`Major: ${major} `); 
+    
 
 
     const onEdit = (t) => {
@@ -92,11 +86,11 @@ export default function toDoList(){
     
     return (
     <div className="mx-25  w-full max-w-sm p-6 bg-white border border-gray-200 rounded-xl shadow-md text-black" key={index}>
-      หัวข้อ {title}
-      คำอธิบาย {desc}
-      วันที่ {date_added}
-      ผู้เขียน {author}
-      สถานะ {isActive(status)}
+       {title}
+       {desc}
+       {date_added}
+       {author}
+      {isActive(status)}
       
     <div className="flex gap-2 mt-2">
    
@@ -105,11 +99,11 @@ export default function toDoList(){
      onClose={() => setSelectedTask(null)}>
      {selectedTask && (
     <div className="p-4 flex flex-col gap-2 text-black">
-      <p><strong>หัวข้อ:</strong> {selectedTask.title}</p>
-      <p><strong>คำอธิบาย:</strong> {selectedTask.desc}</p>
-      <p><strong>วันที่:</strong> {selectedTask.date_added}</p>
-      <p><strong>ผู้เขียน:</strong> {selectedTask.author}</p>
-      <p><strong>สถานะ:</strong> {isActive(selectedTask.status)}</p>
+      <p><strong></strong> {selectedTask.title}</p>
+      <p><strong></strong> {selectedTask.desc}</p>
+      <p><strong></strong> {selectedTask.date_added}</p>
+      <p><strong>:</strong> {selectedTask.author}</p>
+      <p><strong></strong> {isActive(selectedTask.status)}</p>
     </div>
     )}
     </Modal>
@@ -138,18 +132,15 @@ export default function toDoList(){
         <div className="p-6 border border-gray-200 rounded-[28px]">
             <div className="mb-4">
                 <p className="text-sm text-gray-600 flex items-center mb-2 font-medium">
-                    TO DO LIST 007
+                    
                     
                 </p>
                 <div className="text-gray-900 font-bold text-xl space-y-1 ">
-                    <p>ชื่อ: {name}</p>
-                    <p>สาขา: {major}</p>
-                    <p>ชั้นปี: {classYear}</p>
-                    <p>สถานะ: {isActive(active)}</p>
+                    
 
                 </div>
                  </div>
-                <ToDoFrom 
+                <Herbhome
                     addTask={addTask}
                     editingTask = {editingTask}
                     updateTask= {updateTask}

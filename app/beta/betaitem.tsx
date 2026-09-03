@@ -1,46 +1,25 @@
-export const BetaItem = [
+export const HERBITEM = [
 
     {
         id: 1,
-        title: "เรียนวิชา web Programming",
-        desc: "React, (Next.js), Node.js และ Firebase fisestore",
-        date_added: "23/07/2569",
-        author: "Thanakron",
-        status: true
+        name:"",
+        detail:"",
+        type:"",
+        supplier:"",
     },
     {   
-        id: 2,
-        title: "แข่งเกมส์",
-        desc: "เล่นเกมส์ที่สนามแข่ง Bankok",
-        date_added: "23/07/2569",
-        author: "Thanakron",
-        status: true
+        id: 1,
+        name:"",
+        detail:"",
+        type:"",
+        supplier:"",
     },
     {
-        id: 3,
-        title: "แข่งทำอาหาร",
-        desc: "แข่งทำอาหารที่ภัตรตาคาร 5 ดาว",
-        date_added: "23/07/2569",
-        author: "Thanakron",
-        status: true
+        id: 1,
+        name:"",
+        detail:"",
+        type:"",
+        supplier:"",
     }
 ]; 
 
-export const BETAITEMS = [
- {
-    id: 4,
-    title: "มายคราฟ",
-    desc: "เอาชีวิตรอด 100 Day",
-    date_added: "23/07/2569",
-    author: "Thanakron",
-    status: false
- },
-{
-    id: 5,
-    title: "อนิเมะ",
-    desc: "การแข่งขันคอสเพล์",
-    date_added: "23/07/2569",
-    author: "Thanakron",
-    status: false
-}
-];
