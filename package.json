@@ -2,14 +2,19 @@
   "name": "jay-next-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "api": "node server/prawitapi.js"
   },
   "dependencies": {
-    "next": "16.2.10",
+    "body-parser": "^2.3.0",
+    "cors": "^2.8.6",
+    "next": "^16.3.5",
+    "node": "^26.9.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -22,5 +27,8 @@
     "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "allowScripts": {
+    "unrs-resolver@1.12.2": true
   }
 }

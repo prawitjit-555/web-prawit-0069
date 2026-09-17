@@ -7,7 +7,7 @@ export const shops = [
     status: false
   },
   {
-    id: 2,
+    id: 200,
     title: "steam",
     location: { lat: 105, long: 109 },
     status: true
